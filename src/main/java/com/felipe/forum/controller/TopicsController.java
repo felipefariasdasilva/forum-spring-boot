@@ -2,12 +2,14 @@ package com.felipe.forum.controller;
 
 import com.felipe.forum.controller.dto.DetailsOfTopicDTO;
 import com.felipe.forum.controller.dto.TopicDTO;
+import com.felipe.forum.controller.dto.UpdateTopicForm;
 import com.felipe.forum.controller.form.TopicForm;
 import com.felipe.forum.model.Topic;
 import com.felipe.forum.repository.CurseRepository;
 import com.felipe.forum.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -37,11 +39,11 @@ public class TopicsController {
     }
 
     @PostMapping
-    public ResponseEntity<TopicDTO> create(@RequestBody @Valid TopicForm form, UriComponentsBuilder uriComonentsBuilder){
+    public ResponseEntity<TopicDTO> create(@RequestBody @Valid TopicForm form, UriComponentsBuilder uriComponentsBuilder){
         Topic topic = form.convert(curseRepository);
         topicRepository.save(topic);
 
-        URI uri = uriComonentsBuilder.path("/topics/{id}").buildAndExpand(topic.getId()).toUri();
+        URI uri = uriComponentsBuilder.path("/topics/{id}").buildAndExpand(topic.getId()).toUri();
         return ResponseEntity.created(uri).body(new TopicDTO(topic));
     }
 
@@ -49,5 +51,14 @@ public class TopicsController {
     public DetailsOfTopicDTO detail(@PathVariable Long id){
         Topic topic = topicRepository.getOne(id);
         return new DetailsOfTopicDTO(topic);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<TopicDTO> update(@PathVariable Long id, @RequestBody @Valid UpdateTopicForm form){
+
+        Topic topic = form.update(id, topicRepository);
+
+        return ResponseEntity.ok(new TopicDTO(topic));
     }
 }
