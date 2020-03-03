@@ -28,6 +28,9 @@ public class Topic {
     @OneToMany(mappedBy = "topic")
     private List<Response> responses = new ArrayList<>();
 
+    public Topic() {
+    }
+
     public Topic(String title, String message, Curse curse) {
         this.title = title;
         this.message = message;
