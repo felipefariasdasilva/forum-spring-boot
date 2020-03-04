@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -33,9 +34,7 @@ public class TopicsController {
 
     @GetMapping
     public Page<TopicDTO> list(@RequestParam(required = false) String curseName,
-                               @RequestParam int page, @RequestParam int count){
-
-        Pageable pageable = PageRequest.of(page, count);
+                               @PageableDefault (sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
 
         if(curseName == null){
             Page<Topic> topics = topicRepository.findAll(pageable);
