@@ -8,6 +8,9 @@ import com.felipe.forum.model.Topic;
 import com.felipe.forum.repository.CurseRepository;
 import com.felipe.forum.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -29,12 +32,16 @@ public class TopicsController {
     private CurseRepository curseRepository;
 
     @GetMapping
-    public List<TopicDTO> list(String curseName){
+    public Page<TopicDTO> list(@RequestParam(required = false) String curseName,
+                               @RequestParam int page, @RequestParam int count){
+
+        Pageable pageable = PageRequest.of(page, count);
+
         if(curseName == null){
-            List<Topic> topics = topicRepository.findAll();
+            Page<Topic> topics = topicRepository.findAll(pageable);
             return TopicDTO.convert(topics);
         }else {
-            List<Topic> topics = topicRepository.findByCurseName(curseName);
+            Page<Topic> topics = topicRepository.findByCurseName(curseName, pageable);
             return TopicDTO.convert(topics);
         }
     }
