@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @EnableSpringDataWebSupport
@@ -14,4 +16,8 @@ public class ForumApplication {
 		SpringApplication.run(ForumApplication.class, args);
 	}
 
+	@GetMapping("/")
+	public String helloworld(){
+		return "hello world! =)";
+	}
 }
