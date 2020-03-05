@@ -8,8 +8,9 @@ import com.felipe.forum.model.Topic;
 import com.felipe.forum.repository.CurseRepository;
 import com.felipe.forum.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -33,6 +34,7 @@ public class TopicsController {
     private CurseRepository curseRepository;
 
     @GetMapping
+    @Cacheable(value = "topicList")
     public Page<TopicDTO> list(@RequestParam(required = false) String curseName,
                                @PageableDefault (sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
 
@@ -47,6 +49,7 @@ public class TopicsController {
 
     @PostMapping
     @Transactional
+    @CacheEvict(value = "topicList", allEntries = true)
     public ResponseEntity<TopicDTO> create(@RequestBody @Valid TopicForm form, UriComponentsBuilder uriComponentsBuilder){
         Topic topic = form.convert(curseRepository);
         topicRepository.save(topic);
@@ -67,6 +70,7 @@ public class TopicsController {
 
     @PutMapping("/{id}")
     @Transactional
+    @CacheEvict(value = "topicList", allEntries = true)
     public ResponseEntity<TopicDTO> update(@PathVariable Long id, @RequestBody @Valid UpdateTopicForm form){
 
         Optional<Topic> topicOptional = topicRepository.findById(id);
@@ -81,6 +85,7 @@ public class TopicsController {
 
     @DeleteMapping("/{id}")
     @Transactional
+    @CacheEvict(value = "topicList", allEntries = true)
     public ResponseEntity<?> delete(@PathVariable Long id){
 
         Optional<Topic> topicOptional = topicRepository.findById(id);
