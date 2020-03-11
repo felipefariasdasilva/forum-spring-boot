@@ -2,7 +2,6 @@ package com.felipe.forum.config.validation.security;
 
 import com.felipe.forum.model.User;
 import com.felipe.forum.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -15,10 +14,7 @@ import java.io.IOException;
 
 public class AuthenticationByTokenFilter extends OncePerRequestFilter {
 
-    @Autowired
     private TokenService tokenService;
-
-    @Autowired
     private UserRepository userRepository;
 
     public AuthenticationByTokenFilter(TokenService tokenService, UserRepository userRepository) {
@@ -34,8 +30,8 @@ public class AuthenticationByTokenFilter extends OncePerRequestFilter {
         if(isValid){
             System.out.println("token: " + token);
             clientAuthentication(token);
-            filterChain.doFilter(request, response);
         }
+        filterChain.doFilter(request, response);
     }
 
     private void clientAuthentication(String token) {
