@@ -1,4 +1,4 @@
-# Título do Projeto
+# Doubts Forum
 
 Um parágrafo simples dando uma descrição sobre o projeto 
 
@@ -58,10 +58,7 @@ Dê um exemplo
 Adicione notas de como dar deploy do sistema em produção.
 
 ## Desenvolvido com
-Mencionar os frameworks e ferramentes utilizados para se desenvolver essa aplicação. Como por exemplo:
-
-* [Angular](https://angular.io/) - O framework web utilizado
-* [MongoDb](https://www.mongodb.com/) - O banco de dados utilizado.
+* [Spring Boot](https://spring.io/projects/spring-boot) - O framework web utilizado
 
 ## Contribuições
 
