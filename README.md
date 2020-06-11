@@ -16,17 +16,23 @@ Dê um exemplo
 
 ### Instalação
 
-Passo a passo seguidos de exemplos mostrando como se obter o ambiente de desenvolvimento rodando. É uma boa prática colocar o modo de instalação para Windows, macOS e para as principais distribuições Linux.
+Para rodar a aplicação, execute os próximos passos:
 
-Explique o que essa etapa será
+1. Faça o clone do projeto
 ```
-Dê um exemplo
+https://github.com/felipefariasdasilva/forum-spring-boot.git
 ```
 
-E repita
+2. Entre na pasta
 
 ```
-Até acabar
+cd forum-spring-boot
+```
+
+3. Execute a aplicação com Maven
+
+```
+mvn spring-boot:run
 ```
 
 Finalize com um exemplo obtendo dados do sistema ou fazendo uma pequena demostração do funcionamento da aplicação
@@ -59,6 +65,7 @@ Adicione notas de como dar deploy do sistema em produção.
 
 ## Desenvolvido com
 * [Spring Boot](https://spring.io/projects/spring-boot) - O framework web utilizado
+* [Maven](https://maven.apache.org/) - Gerenciador de dependências
 
 ## Contribuições
 
