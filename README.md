@@ -10,8 +10,10 @@ As instruções a seguir irão lhe proporcionar uma cópia deste projeto e de co
 
 Dependências necessárias para se instalar o software e como instalá-las.
 
+1. É necessário que você tenha Java instalado na sua máquina. Para verificar, rode o seguinte comando:
+
 ```
-Dê um exemplo
+java -version
 ```
 
 ### Instalação
