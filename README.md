@@ -16,6 +16,12 @@ Dependências necessárias para se instalar o software e como instalá-las.
 java -version
 ```
 
+1. É necessário ter o Apache Maven (ferramenta de automação e gerenciamento do projeto) instalado também. Para verificar, rode o seguinte comando:
+
+```
+mvn -v
+```
+
 ### Instalação
 
 Para rodar a aplicação, execute os próximos passos:
