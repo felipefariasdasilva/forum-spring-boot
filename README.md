@@ -1,4 +1,4 @@
-# Doubts Forum
+# :mag: Doubts Forum
 
 API de um fórum de dúvidas
 
